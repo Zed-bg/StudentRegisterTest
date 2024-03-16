@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Registration</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <div>
+        <br>
+        <div class="col-sm-3 form-group border border-secondary rounded p-2">
+            Student Registration Form
+        </div>
+    </div>
+    <br>
+    <div class="row justify-content-center"  th:unless="${student}">
+        <div class="col-sm-11"> <!-- Adjust the column width as per your requirement -->
+            <form th:action="@{/add}" th:object="${newStudent}" method="post">
+                <input type="hidden" th:field="*{id}">
+                <div class="form-group border border-secondary rounded p-2">
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="exampleInputName">Student Name</label>
+                        </div>
+                        <div class="col-6">
+                            <input type="text" class="form-control" id="exampleInputName" placeholder="Enter name" th:field="*{name}">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-4">
+                            <label for="exampleInputDOB">Date of Birth</label>
+                        </div>
+                        <div class="col-6">
+                            <input type="date" class="form-control" id="exampleInputDOB"  th:field="*{dob}">
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-4">
+                            <label for="exampleInputAge">Age</label>
+                        </div>
+                        <div class="col-6">
+                            <input type="text" class="form-control" id="exampleInputAge" placeholder="Enter age"  th:field="*{age}">
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                    <script th:inline="javascript">
+                        // Get the input fields
+                        var dobInput = document.getElementById('exampleInputDOB');
+                        var ageInput = document.getElementById('exampleInputAge');
+
+                        // Add event listener to the date of birth input field
+                        dobInput.addEventListener('change', function() {
+                            // Calculate age
+                            var dob = new Date(this.value);
+                            var today = new Date();
+                            var age = today.getFullYear() - dob.getFullYear();
+                            var m = today.getMonth() - dob.getMonth();
+                            if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+                                age--;
+                            }
+                            // Update the age input field
+                            ageInput.value = age;
+                        });
+                    </script>
+                    <div class="row mt-3">
+                        <div class="col-4">
+                            <label for="exampleFormControlSelect1">Course</label>
+                        </div>
+                        <div class="col-6">
+                            <select class="form-control" id="exampleFormControlSelect1" th:field="*{course}">
+                                <option value="">Select a course</option>
+                                <option value="Biology">Biology</option>
+                                <option value="Chemistry">Chemistry</option>
+                                <option value="English">English</option>
+                                <option value="Math">Math</option>
+                                <option value="Physic">Physics</option>
+                                <option value="Myanmar">Myanmar</option>
+                                <!-- Add more options as needed -->
+                            </select>
+                        </div>
+
+                        <div class="col"></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-4">
+                            <label>Gender</label>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="genderRadio" id="exampleGenderMale" value="Male" th:field="*{gender}">
+                                <label class="form-check-label" for="exampleGenderMale">Male</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="genderRadio" id="exampleGenderFemale" value="Female" th:field="*{gender}">
+                                <label class="form-check-label" for="exampleGenderFemale">Female</label>
+                            </div>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-4">
+                            <label for="exampleInputAddress">Address</label>
+                        </div>
+                        <div class="col-6">
+                            <textarea class="form-control" id="exampleInputAddress" rows="3" placeholder="Enter address"  th:field="*{address}"></textarea>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                <button type="reset" class="btn btn-primary mt-3">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+<!--    update form start-->
+    <div class="row justify-content-center"  th:if="${student}">
+        <div class="col-sm-11"> <!-- Adjust the column width as per your requirement -->
+            <form th:action="@{'/update/' + ${student.id}}" th:object="${student}" method="post">
+                <input type="hidden" th:field="*{id}">
+                <div class="form-group border border-secondary rounded p-2">
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="exampleInputName2">Student Name</label>
+                        </div>
+                        <div class="col-6">
+                            <input type="text" class="form-control" id="exampleInputName2" placeholder="Enter name" th:field="*{name}">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-4">
+                            <label for="exampleInputDOB2">Date of Birth</label>
+                        </div>
+                        <div class="col-6">
+                            <input type="date" class="form-control" id="exampleInputDOB2"  th:field="*{dob}">
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-4">
+                            <label for="exampleInputAge2">Age</label>
+                        </div>
+                        <div class="col-6">
+                            <input type="text" class="form-control" id="exampleInputAge2" placeholder="Enter age"  th:field="*{age}">
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                    <script th:inline="javascript">
+                        // Get the input fields
+                        var dobInput = document.getElementById('exampleInputDOB2');
+                        var ageInput = document.getElementById('exampleInputAge2');
+
+                        // Add event listener to the date of birth input field
+                        dobInput.addEventListener('change', function() {
+                            // Calculate age
+                            var dob = new Date(this.value);
+                            var today = new Date();
+                            var age = today.getFullYear() - dob.getFullYear();
+                            var m = today.getMonth() - dob.getMonth();
+                            if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+                                age--;
+                            }
+                            // Update the age input field
+                            ageInput.value = age;
+                        });
+                    </script>
+                    <div class="row mt-3">
+                        <div class="col-4">
+                            <label for="exampleFormControlSelect12">Course</label>
+                        </div>
+                        <div class="col-6">
+                            <select class="form-control" id="exampleFormControlSelect12" th:field="*{course}">
+                                <option value="Myanmar">Myanmar</option>
+                                <option value="English">English</option>
+                                <option value="Math">Math</option>
+                                <option value="Chemistry">Chemistry</option>
+                                <option value="Physic">Physic</option>
+                                <option value="Biology">Biology</option>
+                                <!-- Add more options as needed -->
+                            </select>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-4">
+                            <label>Gender</label>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="genderRadio" id="exampleGenderMale2" value="Male" th:field="*{gender}">
+                                <label class="form-check-label" for="exampleGenderMale">Male</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="genderRadio" id="exampleGenderFemale2" value="Female" th:field="*{gender}">
+                                <label class="form-check-label" for="exampleGenderFemale">Female</label>
+                            </div>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-4">
+                            <label for="exampleInputAddress2">Address</label>
+                        </div>
+                        <div class="col-6">
+                            <textarea class="form-control" id="exampleInputAddress2" rows="3" placeholder="Enter address"  th:field="*{address}"></textarea>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Update</button>
+                <button type="reset" class="btn btn-primary mt-3" onclick="window.location.href='/';">Cancel</button>
+
+            </form>
+        </div>
+    </div>
+    <!--    update form end-->
+
+
+    <div class="row justify-content-center mt-4">
+        <div class="col-sm-11">
+            <table id="studentTable" class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Age</th>
+                    <th>Course</th>
+                    <th>Gender</th>
+                    <th>Date of Birth</th>
+                    <th>Address</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Table data will be dynamically populated here -->
+                <tr th:each="student : ${students}">
+                    <td th:text="${student.name}"></td>
+                    <td th:text="${student.age}"></td>
+                    <td th:text="${student.course}"></td>
+                    <td th:text="${student.gender}"></td>
+                    <td th:text="${student.dob}"></td>
+                    <td th:text="${student.address}"></td>
+                    <td style="display: flex; justify-content: center;">
+<!--                        <a th:href="@{'/edit/' + ${student.id}}">Edit</a>-->
+<!--                        <a th:href="@{'/delete/' + ${student.id}}">Delete</a>-->
+<!--                        <a th:href="@{'/print/' + ${student.id}}" target="_blank">Print</a>-->
+
+
+                        <a th:href="@{'/edit/' + ${student.id}}" style="margin-right: 15px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
+                            </svg>
+                        </a>
+                        <a th:href="@{'/delete/' + ${student.id}}" style="margin-right: 15px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                            </svg>
+                        </a>
+                        <a th:href="@{'/print/' + ${student.id}}" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
+                                <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
+                                <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1"/>
+                            </svg>
+                        </a>
+
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <hr>
+    <marquee><h5>Developed by Zwe Lwin Oo</h5></marquee>
+
+</div>
+<script>
+    document.getElementById("exampleGenderMale").setAttribute("checked","checked")
+</script>
+
+<script>
+    document.getElementById("exampleInputName").setAttribute("required", "required");
+    document.getElementById("exampleInputDOB").setAttribute("required", "required");
+    document.getElementById("exampleInputAge").setAttribute("required", "required");
+    document.getElementById("exampleFormControlSelect1").setAttribute("required", "required");
+    document.getElementById("exampleInputAddress").setAttribute("required", "required");
+</script>
+</body>
+</html>

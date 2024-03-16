@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.2.final using JasperReports Library version 6.21.2-8434a0bd7c3bbc37cbf916f2968d35e4b165821a  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="StudentReport" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7d5e5b23-67f9-4898-8056-c19fd4b61495">
+	<field name="name" class="java.lang.String"/>
+	<field name="age" class="java.lang.String"/>
+	<field name="course" class="java.lang.String"/>
+	<field name="gender" class="java.lang.String"/>
+	<field name="dob" class="java.lang.String"/>
+	<field name="address" class="java.lang.String"/>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="20" uuid="0a2c72de-49a3-4d84-bcf9-5a6fe6a8eac3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Student Report]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="180" splitType="Stretch">
+			<textField>
+				<reportElement x="210" y="10" width="199" height="20" uuid="b22d4db4-0d6c-41c2-9442-5bc3950b4eab"/>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="210" y="40" width="200" height="20" uuid="7e7dfec1-3fd2-49f1-9c61-b80f6bb5dbff"/>
+				<textFieldExpression><![CDATA[$F{age}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="40" y="10" width="100" height="20" uuid="32c98935-8574-4f62-b3c6-7ffd262efece"/>
+				<text><![CDATA[Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="40" width="100" height="20" uuid="3c9b32ae-2904-4ad6-ae05-0d9e32afdae2"/>
+				<text><![CDATA[Age]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="210" y="70" width="199" height="20" uuid="b0b009ae-5a8a-42a0-bc26-e6ef4d7ad1d3"/>
+				<textFieldExpression><![CDATA[$F{course}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="210" y="100" width="200" height="20" uuid="4979f6f6-945d-47b5-81c4-6529f6eb71d6"/>
+				<textFieldExpression><![CDATA[$F{gender}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="40" y="70" width="100" height="20" uuid="be4adb8b-c70d-4c81-810f-32d4fd9cad70"/>
+				<text><![CDATA[Course]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="100" width="100" height="20" uuid="9058248c-3d9d-44b2-be06-138ce62a09b1"/>
+				<text><![CDATA[Gender]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="210" y="130" width="199" height="20" uuid="28bd8cd5-ff01-468d-afdb-207ea6a77f15"/>
+				<textFieldExpression><![CDATA[$F{dob}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="210" y="160" width="200" height="20" uuid="6aa8818d-a82b-414b-88f0-e3c299888113"/>
+				<textFieldExpression><![CDATA[$F{address}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="40" y="130" width="100" height="20" uuid="e1584115-b1c6-429a-9557-95be39cbc433"/>
+				<text><![CDATA[Date of Birth]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="160" width="100" height="20" uuid="263eb5dc-83e3-4760-a404-7442d70c809a"/>
+				<text><![CDATA[Address]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>
