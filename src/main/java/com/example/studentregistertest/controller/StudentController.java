@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.InputStream;
@@ -101,9 +102,12 @@ public void printStudent(@PathVariable Long id, HttpServletResponse response) th
     InputStream compiledReportStream = Files.newInputStream(jrxmlFilePath.getParent().resolve("studentreport.jasper"));
     JasperPrint jasperPrint = JasperFillManager.fillReport(compiledReportStream, parameters, dataSource);
 
-    // Export the report to PDF and write it to the response output stream
+    // Set the filename with the student's name
+    String filename = StringUtils.isEmpty(student.getName()) ? "student_report.pdf" : student.getName() + "_report.pdf";
     response.setContentType("application/pdf");
-    response.setHeader("Content-Disposition", "inline; filename=student_report.pdf");
+    response.setHeader("Content-Disposition", "inline; filename=" + filename);
+
+    // Export the report to PDF and write it to the response output stream
     JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream());
 }
 //    end

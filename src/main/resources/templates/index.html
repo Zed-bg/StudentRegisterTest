@@ -41,7 +41,7 @@
                             <label for="exampleInputAge">Age</label>
                         </div>
                         <div class="col-6">
-                            <input type="text" class="form-control" id="exampleInputAge" placeholder="Enter age"  th:field="*{age}">
+                            <input type="text" class="form-control" id="exampleInputAge"  th:field="*{age}">
                         </div>
                         <div class="col"></div>
                     </div>
@@ -144,7 +144,7 @@
                             <label for="exampleInputAge2">Age</label>
                         </div>
                         <div class="col-6">
-                            <input type="text" class="form-control" id="exampleInputAge2" placeholder="Enter age"  th:field="*{age}">
+                            <input type="text" class="form-control" id="exampleInputAge2"  th:field="*{age}">
                         </div>
                         <div class="col"></div>
                     </div>
@@ -289,8 +289,18 @@
     document.getElementById("exampleInputName").setAttribute("required", "required");
     document.getElementById("exampleInputDOB").setAttribute("required", "required");
     document.getElementById("exampleInputAge").setAttribute("required", "required");
+    document.getElementById("exampleInputAge").setAttribute("readonly", "readonly");
     document.getElementById("exampleFormControlSelect1").setAttribute("required", "required");
     document.getElementById("exampleInputAddress").setAttribute("required", "required");
+</script>
+
+<script>
+    document.getElementById("exampleInputName2").setAttribute("required", "required");
+    document.getElementById("exampleInputDOB2").setAttribute("required", "required");
+    document.getElementById("exampleInputAge2").setAttribute("required", "required");
+    document.getElementById("exampleInputAge2").setAttribute("readonly", "readonly");
+    document.getElementById("exampleFormControlSelect12").setAttribute("required", "required");
+    document.getElementById("exampleInputAddress2").setAttribute("required", "required");
 </script>
 </body>
 </html>
